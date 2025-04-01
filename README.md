@@ -37,10 +37,10 @@ Com o ambiente virtual ativado, instale as dependências do projeto listadas no 
 pip install -r requirements.txt
 ```
 
-### 6. Acesse a API
-A API estará disponível no navegador ou em qualquer ferramenta como Postman no seguinte endereço:
+### 5. Acesse a API
+Rode o seguinte comando no terminal dentro do path '/ey-chatbot'
 ```
-http://127.0.0.1:8000
+uvicorn api:app --reload
 ```
 Deve aparece algo como isso em seu terminal:
 ```
