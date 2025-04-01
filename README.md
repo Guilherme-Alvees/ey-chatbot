@@ -3,13 +3,16 @@
 Este é um projeto de API construído com FastAPI, integrando a IA do Google Gemini para consultas SQL em um banco de dados PostgreSQL.
 
 ## Como configurar o ambiente
+- É necessário ter o GIT e o Python instalados na máquina
 
 ### 1. Clone este repositório
 Primeiro, clone o repositório para a sua máquina local:
 ```
-git clone https://github.com/Guilherme-Alvees/api-powerbi.git
+git init
 
-cd api-powerbi
+git clone https://github.com/Guilherme-Alvees/ey-chatbot.git
+
+cd ey-chatbot
 ```
 
 ### 2. Crie um ambiente virtual
