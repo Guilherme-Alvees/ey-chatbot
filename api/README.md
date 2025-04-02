@@ -13,6 +13,8 @@ git init
 git clone https://github.com/Guilherme-Alvees/ey-chatbot.git
 
 cd ey-chatbot
+
+cd api
 ```
 
 ### 2. Crie um ambiente virtual
