@@ -1,0 +1,11 @@
+{
+    "dataRoles": [
+        {
+            "name": "values",
+            "displayName": "Values",
+            "kind": "Measure"
+        }
+    ],
+    "objects": {},
+    "version": "1.0.0"
+}
