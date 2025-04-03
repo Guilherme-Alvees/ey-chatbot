@@ -1,6 +1,6 @@
-import React from 'react';
-import { CssBaseline, Container } from '@mui/material';
-import Chatbot from './components/Chatbot';
+import React from "react";
+import { CssBaseline, Container } from "@mui/material";
+import Chatbot from "./components/Chatbot";
 
 function App() {
   return (
@@ -8,10 +8,10 @@ function App() {
       <CssBaseline />
       <Container
         sx={{
-          display: 'flex',
-          justifyContent: 'center',
-          alignItems: 'center',
-          height: '100vh',
+          display: "flex",
+          justifyContent: "center",
+          alignItems: "center",
+          height: "100vh",
         }}
       >
         <Chatbot />
