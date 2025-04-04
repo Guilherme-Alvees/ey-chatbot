@@ -6,6 +6,7 @@ from fastapi import FastAPI, HTTPException, Body
 from fastapi.middleware.cors import CORSMiddleware
 from dotenv import load_dotenv
 from pydantic import BaseModel
+from fastapi.middleware.cors import CORSMiddleware
 
 # Configuração básica de logging
 logging.basicConfig(level=logging.INFO, format="%(asctime)s - %(levelname)s - %(message)s")
@@ -16,14 +17,15 @@ load_dotenv()
 # Cria a aplicação FastAPI
 app = FastAPI(title="API IA + PostgreSQL", version="1.0")
 
-# Configuração de CORS
+# Configuração CORRETA de CORS
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=["*"],  # Permite todas as origens (ajuste para produção)
+    allow_origins=["*"],  # Permite TODOS os origens (em produção, restrinja isso)
     allow_credentials=True,
     allow_methods=["*"],  # Permite todos os métodos
     allow_headers=["*"],  # Permite todos os headers
 )
+
 
 # Configurações do banco de dados e API Gemini
 DB_CONNECTION_STRING = os.getenv("DB_CONNECTION_STRING")
