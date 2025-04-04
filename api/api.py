@@ -8,31 +8,25 @@ from dotenv import load_dotenv
 from pydantic import BaseModel
 from fastapi.middleware.cors import CORSMiddleware
 
-# Configuração básica de logging
 logging.basicConfig(level=logging.INFO, format="%(asctime)s - %(levelname)s - %(message)s")
 
-# Carrega variáveis de ambiente
 load_dotenv()
 
-# Cria a aplicação FastAPI
 app = FastAPI(title="API IA + PostgreSQL", version="1.0")
 
-# Configuração CORRETA de CORS
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=["*"],  # Permite TODOS os origens (em produção, restrinja isso)
+    allow_origins=["*"],  
     allow_credentials=True,
-    allow_methods=["*"],  # Permite todos os métodos
-    allow_headers=["*"],  # Permite todos os headers
+    allow_methods=["*"],  
+    allow_headers=["*"],  
 )
 
 
-# Configurações do banco de dados e API Gemini
 DB_CONNECTION_STRING = os.getenv("DB_CONNECTION_STRING")
 GEMINI_API_URL = os.getenv("GEMINI_API_URL")
 GEMINI_API_KEY = os.getenv("GEMINI_API_KEY")
 
-# Modelo para a requisição
 class PerguntaRequest(BaseModel):
     pergunta: str
 
@@ -60,13 +54,11 @@ def validar_consulta_sql(consulta: str) -> bool:
     palavras_proibidas = ["insert", "update", "delete", "drop", "alter", "truncate", "grant"]
     consulta = consulta.lower()
     
-    # Verifica comandos perigosos
     for palavra in palavras_proibidas:
         if palavra in consulta:
             logging.warning(f"Tentativa de consulta perigosa: {consulta}")
             return False
     
-    # Verifica se é uma consulta SELECT válida
     if not consulta.strip().startswith("select"):
         return False
     
@@ -129,7 +121,7 @@ Responda às perguntas de forma segura e adequada.
 @app.get("/status")
 def verificar_status():
     """Endpoint para verificar o status da API."""
-    return {"status": "API operacional", "version": "1.0"}
+    return {"status": "200 OK"}
 
 @app.post("/consultar")
 def consultar_banco(request: PerguntaRequest = Body(...)):
@@ -142,9 +134,8 @@ def consultar_banco(request: PerguntaRequest = Body(...)):
     try:
         logging.info(f"Recebida pergunta: {request.pergunta}")
         resposta_ia = chamar_gemini(request.pergunta)
-        logging.info(f"Resposta da IA: {resposta_ia[:200]}...")  # Log parcial para evitar poluição
+        logging.info(f"Resposta da IA: {resposta_ia[:200]}...") 
 
-        # Se for uma consulta SQL válida
         if resposta_ia.strip().upper().startswith("SELECT"):
             if not validar_consulta_sql(resposta_ia):
                 raise HTTPException(
@@ -162,7 +153,6 @@ def consultar_banco(request: PerguntaRequest = Body(...)):
                 resultado = cursor.fetchall()
                 
                 if resultado:
-                    # Formata a resposta de acordo com a consulta
                     if len(resultado[0]) == 1:
                         resposta = str(resultado[0][0])
                     else:
@@ -189,7 +179,6 @@ def consultar_banco(request: PerguntaRequest = Body(...)):
                 if conn:
                     conn.close()
         
-        # Se for uma resposta direta da IA
         return {
             "pergunta": request.pergunta,
             "resposta": resposta_ia,
@@ -197,7 +186,7 @@ def consultar_banco(request: PerguntaRequest = Body(...)):
         }
 
     except HTTPException:
-        raise  # Re-lança exceções HTTP já tratadas
+        raise  
     except Exception as e:
         logging.error(f"Erro inesperado: {str(e)}", exc_info=True)
         raise HTTPException(
