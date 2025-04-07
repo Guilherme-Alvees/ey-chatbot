@@ -1,7 +1,10 @@
 HTML CARD = 
 "
 <div class='chat-container'>
-    <div class='chat-messages' id='chatMessages'></div>
+    <div class='chat-messages' id='chatMessages'>
+        <!-- Mensagem inicial inserida diretamente no HTML -->
+        <div class='message bot-message'>Olá, como posso te ajudar?</div>
+    </div>
     <div class='typing-indicator' id='typingIndicator'>
         <div class='typing-dot'></div>
         <div class='typing-dot'></div>
@@ -20,8 +23,8 @@ HTML CARD =
 
 <style>
 html, body {
-    height: 100%; /* Garante que o html e body ocupem 100% da altura */
-    margin: 0; /* Remove margens padrão */
+    height: 100%;
+    margin: 0;
     background-color: #393939; 
 }
 
@@ -30,7 +33,7 @@ html, body {
     display: flex;
     flex-direction: column;
     height: 100%;
-    background-color: #393939; /* Cor de fundo */
+    background-color: #393939;
     border-radius: 8px;
     box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
     overflow: hidden;
@@ -41,8 +44,7 @@ html, body {
     flex: 1;
     padding: 16px;
     overflow-y: auto;
-    padding-bottom: 70px; /* Espaço para o input-area */
-
+    padding-bottom: 70px;
 }
 
 .message {
@@ -56,15 +58,15 @@ html, body {
 }
 
 .user-message {
-    background-color: #ffe400; /* Amarelo para mensagens do usuário */
-    color: #2e2e38; /* Texto escuro */
+    background-color: #ffe400;
+    color: #2e2e38;
     margin-left: auto;
     border-bottom-right-radius: 4px;
 }
 
 .bot-message {
-    background-color: #545454; /* Cinza para mensagens do bot */
-    color: #d9d9d9; /* Cor do texto */
+    background-color: #545454;
+    color: #d9d9d9;
     margin-right: auto;
     border-bottom-left-radius: 4px;
 }
@@ -80,7 +82,7 @@ html, body {
 .typing-dot {
     width: 8px;
     height: 8px;
-    background-color: #d9d9d9; /* Cor dos pontos de digitação */
+    background-color: #d9d9d9;
     border-radius: 50%;
     opacity: 0.4;
     animation: typingAnimation 1.4s infinite ease-in-out;
@@ -89,8 +91,8 @@ html, body {
 .input-area {
     display: flex;
     padding: 12px 16px;
-    background-color: #393939; /* Cor de fundo do input */
-    border-top: 1px solid #545454; /* Borda superior */
+    background-color: #393939;
+    border-top: 1px solid #545454;
     position: fixed;
     bottom: 0;
     left: 0;
@@ -101,20 +103,20 @@ html, body {
 #messageInput {
     flex: 1;
     padding: 10px 14px;
-    border: 1px solid #545454; /* Borda do input */
+    border: 1px solid #545454;
     border-radius: 20px;
     outline: none;
     font-size: 14px;
-    color: #d9d9d9; /* Cor do texto dentro do input */
-    background-color: #737373; /* Cor de fundo do input */
+    color: #d9d9d9;
+    background-color: #737373;
 }
 
 #sendButton {
     width: 40px;
     height: 40px;
     margin-left: 8px;
-    background-color: #ffe400; /* Amarelo para o botão */
-    color: #2e2e38; /* Texto escuro */
+    background-color: #ffe400;
+    color: #2e2e38;
     border: none;
     border-radius: 50%;
     cursor: pointer;
@@ -125,7 +127,7 @@ html, body {
 }
 
 #sendButton:hover {
-    background-color: #d4c300; /* Amarelo mais escuro ao passar o mouse */
+    background-color: #d4c300;
 }
 
 .debug-info {
@@ -154,11 +156,7 @@ const API_URL = 'http://127.0.0.1:8000/consultar'
 const DEBUG_MODE = true
 const USE_CORS_PROXY = true
 
-// Adiciona mensagem inicial quando o chat carrega
-document.addEventListener('DOMContentLoaded', function() {
-    displayMessage('Olá, como posso te ajudar?', true) // Mensagem inicial
-});
-
+// Função para exibir mensagens
 function displayMessage(text, isUser, debugInfo = null) {
     const chatMessages = document.getElementById('chatMessages')
     const messageDiv = document.createElement('div')
@@ -284,5 +282,11 @@ document.getElementById('messageInput').addEventListener('keypress', function(e)
         sendMessage()
     }
 })
+
+// Garante que o chat sempre apareça rolado para baixo
+window.onload = function() {
+    const chatMessages = document.getElementById('chatMessages')
+    chatMessages.scrollTop = chatMessages.scrollHeight
+}
 </script>
 "

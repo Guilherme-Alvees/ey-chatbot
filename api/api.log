@@ -1,0 +1,12 @@
+2025-04-07 15:22:08,817 - INFO - PDF de insights carregado com 5 trechos
+2025-04-07 15:22:23,407 - INFO - Recebida pergunta: bom dia
+2025-04-07 15:22:25,408 - INFO - Resposta da IA: Bom dia!...
+2025-04-07 15:22:36,708 - INFO - Recebida pergunta: qual foi o maior valor na taxa do ipca em 2023?
+2025-04-07 15:22:37,539 - INFO - Resposta da IA: ```sql
+SELECT MAX(taxa_ipca) 
+FROM ipca 
+WHERE ano = 2023;
+```...
+2025-04-07 15:35:18,785 - INFO - PDF carregado com 5 trechos de conhecimento
+2025-04-07 15:35:25,752 - INFO - Consultando: qual foi o maior valor na taxa do ipca em 2023?
+2025-04-07 15:45:00,665 - INFO - Consultando: o que aconteceu em 2023
